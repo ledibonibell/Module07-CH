@@ -1,0 +1,35 @@
+; $NOMOD51
+; $INCLUDE (8051.MCU)
+
+Q BIT P3.2
+U BIT P1.1; 20H.3
+V BIT P1.3
+W BIT P1.5 ;22H.0
+X BIT P2.0 ; 28H.2;
+Z BIT P2.5
+A1 BIT P1.0; 28H.5
+B1 BIT  P1.4 ; 21H.4
+C1 BIT P1.6; 25H.0
+
+ORG 0H
+
+MAIN:
+   TEST_W:
+      JNB W, TEST_X
+      JB V, SET_Q
+   TEST_X:
+      JNB X, TEST_A1
+      JNB Z, SET_Q
+   TEST_A1:
+      JB A1, TEST_U
+      JNB C1, CLR_Q
+   TEST_U:
+      JB U, SET_Q
+      JB B1, CLR_Q
+   CLR_Q:
+      CLR Q
+      JMP TEST_W
+   SET_Q:
+      SETB Q
+      JMP TEST_W
+END
